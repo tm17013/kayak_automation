@@ -30,8 +30,10 @@ public class HomePage {
 
     public void selectKayakLink() {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("https://www.kayak.com.sv/")));
-            driver.findElement(By.linkText("https://www.kayak.com.sv/")).click();
+            // XPath para localizar el enlace de Kayak en los resultados de búsqueda de Google
+            String xpathkayaklink = "//a[@href='https://www.kayak.com.sv/']";
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathkayaklink)));
+            driver.findElement(By.xpath(xpathkayaklink)).click();
             System.out.println("Enlace de Kayak seleccionado correctamente.");
         } catch (Exception e) {
             System.out.println("Error al seleccionar el enlace de Kayak: " + e.getMessage());
