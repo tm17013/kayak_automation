@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="KayakTestSuite">
+    <test name="KayakTests">
+        <classes>
+            <class name="test.java.tests.VuelosTest"/>
+            <class name="test.java.tests.AlojamientosTest"/>
+            <class name="test.java.tests.VuelosdirectosTest"/>
+        </classes>
+    </test>
+</suite>
+
