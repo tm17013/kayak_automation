@@ -23,12 +23,13 @@ public class VuelosdirectosTest {
     public void setUp() {
         driver = DriverSetup.getDriver();
         homePage = new HomePage(driver);
+        homePage.searchKayak();
+        homePage.selectKayakLink();
     }
 
     @Test
     public void testBuscarVuelosDirectos() {
-        homePage.searchKayak();
-        homePage.selectKayakLink();
+
 
 //      Crea variables para el tiempo de espera
         Duration duration = Duration.ofSeconds(10);
