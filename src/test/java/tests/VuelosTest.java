@@ -129,17 +129,18 @@ public class VuelosTest {
         }
 
         // Paso 8: Hacer clic en el botón de "Buscar"
-        //WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > span > button")));
-        WebElement searchButton = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > span > button")));
+        // Crear WebDriverWait reutilizable
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // Hacer clic en el botón de búsqueda
+        WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > span > button")));
         searchButton.click();
         System.out.println("Botón de Buscar clickeado.");
+
         // Guardar la ventana original
         String originalWindow = driver.getWindowHandle();
-
-        // Esperar a que se abra la nueva ventana (pestaña)
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(d -> d.getWindowHandles().size() > 1);
-
-        // Cambiar al nuevo foco (ventana o pestaña)
+        // Esperar a que se abra una nueva ventana/pestaña
+        wait.until(d -> d.getWindowHandles().size() > 1);
+        //Cambiar al nuevo foco (ventana o pestaña)
         Set<String> allWindows = driver.getWindowHandles();
         for (String windowHandle : allWindows) {
             if (!windowHandle.equals(originalWindow)) {
@@ -148,25 +149,20 @@ public class VuelosTest {
             }
         }
 
-        // Ahora esperamos hasta que el contenedor de resultados sea visible en la nueva ventana/pestaña
-        WebElement resultsContainer = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div")));
-
-        // Garantizar que el contenedor de resultados esté en vista
+        //Esperar y garantizar la visibilidad del contenedor de resultados
+        WebElement resultsContainer = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", resultsContainer);
-
-        // Esperar hasta que aparezcan los elementos de resultados
-        WebElement filteredResults = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div > div > span.bE-8-filtered")));
-        WebElement totalResults = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div > div > div.bE-8-total-link")));
-
-        // Extraer texto de los resultados
+        // Esperar a que los elementos de resultados sean visibles
+        WebElement filteredResults = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div > div > span.bE-8-filtered")));
+        WebElement totalResults = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div > div > div.bE-8-total-link")));
+        // Extraer y mostrar los resultados
         String filteredResultsText = filteredResults.getText();
         String totalResultsText = totalResults.getText();
 
-        // Imprimir resultados
         System.out.println("Número de vuelos filtrados: " + filteredResultsText);
         System.out.println("Número total de vuelos: " + totalResultsText);
         System.out.println("Conteo de vuelos:");
-        System.out.println(filteredResultsText + "de" + totalResultsText);
+        System.out.println(filteredResultsText + " de " + totalResultsText);
 
         //TestCaseVuelos Exitoso
         System.out.println("KTC-01 exitoso!");
