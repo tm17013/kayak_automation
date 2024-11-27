@@ -3,8 +3,10 @@ package test.java.tests;
 import main.java.driver.DriverSetup;
 import main.java.pages.HomePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -39,6 +41,8 @@ public class VuelosdirectosTest {
         menuButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("mc6t-nav-button")));
         menuButton.click();
         System.out.println("Despliega el menu");
+        Actions actions = new Actions(driver);
+
 
 //        Dentro del try esta la prueba de dar click en el apartado de vuelos directos y si no se puede acceder acaba el test
 
@@ -54,6 +58,9 @@ public class VuelosdirectosTest {
 
         driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div[1]/div[1]/div/div")).sendKeys("Internacional de El Salvador, San Salvador, El Salvador");
         System.out.println("Introduce el aeropuesrto");
+
+
+        actions.sendKeys(Keys.PAGE_UP).perform();
 
 //        Introduce la fecha y la selecciona de la lista emergente
 
