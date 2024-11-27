@@ -2,10 +2,7 @@ package test.java.tests;
 
 import main.java.pages.HomePage;
 import main.java.driver.DriverSetup;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -14,6 +11,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.Set;
 
 public class VuelosTest {
     private WebDriver driver;
@@ -103,9 +101,9 @@ public class VuelosTest {
         // Paso 7: Seleccionar Fecha de Ida y Vuelta- Probar si es necesario scroll o no.
         try {
             // Realizar scroll 125px hacia abajo para asegurarse de que el calendario esté visible
-//            JavascriptExecutor js = (JavascriptExecutor) driver;
-//            js.executeScript("window.scrollBy(0, 125);");
-//            System.out.println("Desplazamiento realizado 125px hacia abajo.");
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0, 125);");
+            System.out.println("Desplazamiento realizado 125px hacia abajo.");
 
             // Esperar y hacer clic en el botón de fecha de ida para desplegar el calendario
             WebElement fechaIdaButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".JONo-button")));
@@ -131,22 +129,44 @@ public class VuelosTest {
         }
 
         // Paso 8: Hacer clic en el botón de "Buscar"
-        WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > span > button")));
+        //WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > span > button")));
+        WebElement searchButton = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > span > button")));
         searchButton.click();
         System.out.println("Botón de Buscar clickeado.");
+        // Guardar la ventana original
+        String originalWindow = driver.getWindowHandle();
 
-        //Esperar a que los resultados estén disponibles
-        System.out.println("Esperando a que aparezca el número de vuelos filtrados...");
-        WebElement filteredResults = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div > div > span")));
-        WebElement totalResults = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div > div > div")));
+        // Esperar a que se abra la nueva ventana (pestaña)
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(d -> d.getWindowHandles().size() > 1);
 
-        // Extraer los valores de los resultados
-        String filteredResultsText = filteredResults.getText(); // Ejemplo: "943"
-        String totalResultsText = totalResults.getText(); // Ejemplo: "1445 vuelos"
+        // Cambiar al nuevo foco (ventana o pestaña)
+        Set<String> allWindows = driver.getWindowHandles();
+        for (String windowHandle : allWindows) {
+            if (!windowHandle.equals(originalWindow)) {
+                driver.switchTo().window(windowHandle);  // Cambiar a la nueva pestaña
+                break;
+            }
+        }
 
-        // Imprimir los resultados
+        // Ahora esperamos hasta que el contenedor de resultados sea visible en la nueva ventana/pestaña
+        WebElement resultsContainer = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div")));
+
+        // Garantizar que el contenedor de resultados esté en vista
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", resultsContainer);
+
+        // Esperar hasta que aparezcan los elementos de resultados
+        WebElement filteredResults = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div > div > span.bE-8-filtered")));
+        WebElement totalResults = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftRail > div > div.e_0j-results-count > div > div > div.bE-8-total-link")));
+
+        // Extraer texto de los resultados
+        String filteredResultsText = filteredResults.getText();
+        String totalResultsText = totalResults.getText();
+
+        // Imprimir resultados
         System.out.println("Número de vuelos filtrados: " + filteredResultsText);
         System.out.println("Número total de vuelos: " + totalResultsText);
+        System.out.println("Conteo de vuelos:");
+        System.out.println(filteredResultsText + "de" + totalResultsText);
 
         //TestCaseVuelos Exitoso
         System.out.println("KTC-01 exitoso!");
