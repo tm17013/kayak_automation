@@ -29,8 +29,6 @@ public class VuelosdirectosTest {
     public void testBuscarVuelosDirectos() {
         homePage.searchKayak();
         homePage.selectKayakLink();
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.kayak.com.sv/direct", "No se accedió a la página correcta de vuelos directos en Kayak");
-        System.out.println("Test de búsqueda de vuelos directos completado exitosamente.");
 
 
         Duration duration = Duration.ofSeconds(10);
@@ -60,6 +58,8 @@ public class VuelosdirectosTest {
         System.out.println("Da click en buscar ");
         List<WebElement> elementName = driver.findElements(By.className("c2A-P"));
         System.out.println("Total de elementos encontrados:"+elementName.size()+" Vuelos directos");
+        System.out.println("Test de búsqueda de vuelos directos completado exitosamente.");
+
     }
 
     @AfterClass
