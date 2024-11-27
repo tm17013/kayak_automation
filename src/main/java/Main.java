@@ -18,19 +18,31 @@ public class Main {
     static VuelosTest vuelosTest = new VuelosTest();
 
     public static void main(String[] args) {
-        vuelosTest.setUp();
-        try {
-            vuelosTest.testBuscarVuelos();
-        } catch (Exception e){
-            System.out.println(e);
+        // Instanciar las clases de prueba
+        VuelosTest vuelosTest = new VuelosTest();
+        VuelosdirectosTest vuelosdirectosTest = new VuelosdirectosTest();
 
-            System.out.println("Se omitio este metodo");
-            vuelosdirectosTest.setUp();
+        // Ejecutar las pruebas para vuelosTest
+        try {
+            System.out.println("Iniciando setUp para VuelosTest...");
+            vuelosTest.setUp(); // Inicializa el driver y la configuración necesaria
+            vuelosTest.testBuscarVuelos(); // Ejecuta el test principal
+        } catch (Exception e) {
+            System.out.println("Error en VuelosTest: " + e.getMessage());
+        } finally {
+            vuelosTest.tearDown(); // Cierra el driver y libera recursos
         }
 
-        vuelosdirectosTest.testBuscarVuelosDirectos();
-        vuelosdirectosTest.tearDown();
-
-
+        // Ejecutar las pruebas para vuelosDirectosTest
+        try {
+            System.out.println("Iniciando setUp para VuelosDirectosTest...");
+            vuelosdirectosTest.setUp(); // Inicializa el driver y la configuración necesaria
+            vuelosdirectosTest.testBuscarVuelosDirectos(); // Ejecuta el test principal
+        } catch (Exception e) {
+            System.out.println("Error en VuelosDirectosTest: " + e.getMessage());
+        } finally {
+            vuelosdirectosTest.tearDown(); // Cierra el driver y libera recursos
+        }
     }
+
 }
