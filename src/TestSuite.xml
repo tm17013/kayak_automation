@@ -3,7 +3,7 @@
     <test name="KayakTests">
         <classes>
             <class name="test.java.tests.VuelosTest"/>
-
+            <class name="test.java.tests.AlojamientosTest"/>
             <class name="test.java.tests.VuelosdirectosTest"/>
         </classes>
     </test>

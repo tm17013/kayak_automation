@@ -17,7 +17,7 @@ public class Main {
         VuelosTest vuelosTest = new VuelosTest();
         AlojamientosTest alojamientosTest = new AlojamientosTest();
         VuelosdirectosTest vuelosdirectosTest = new VuelosdirectosTest();
-
+        //Pruebas Consecutivas
         // Ejecuta las prueba VuelosTest
         try {
             System.out.println("Iniciando setUp para VuelosTest...");
@@ -28,15 +28,15 @@ public class Main {
         }
 
 //        // Ejecuta las prueba AlojamientosTest
-//        try {
-//            System.out.println("Iniciando setUp para AlojamientosTest...");
-//            alojamientosTest.setUp(); // Inicializa el entorno para AlojamientosTest
-//            alojamientosTest.testBuscarAlojamientos(); // Ejecuta la prueba
-//        } catch (Exception e) {
-//            System.out.println("Error en AlojamientosTest: " + e.getMessage());
-//        }
+        try {
+            System.out.println("Iniciando setUp para AlojamientosTest...");
+            alojamientosTest.setUp(); // Inicializa el entorno para AlojamientosTest
+            alojamientosTest.testBuscarAlojamientos(); // Ejecuta la prueba
+        } catch (Exception e) {
+            System.out.println("Error en AlojamientosTest: " + e.getMessage());
+        }
 
-        // Ejecutar las pruebas para VuelosDirectosTest
+         //Ejecuta las pruebas para VuelosDirectosTest
         try {
             System.out.println("Iniciando setUp para VuelosDirectosTest...");
             vuelosdirectosTest.setUp(); // Inicializa el driver y la configuración necesaria
