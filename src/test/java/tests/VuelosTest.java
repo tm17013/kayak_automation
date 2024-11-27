@@ -79,8 +79,9 @@ public class VuelosTest {
         origencampo.click();
         // Escribir el valor y seleccionar la opción correcta con teclas
         origencampo.sendKeys("San Salvador, El Salvador (ILS - Ilopango)");
-        new WebDriverWait(driver, Duration.ofSeconds(20)).until(d -> true); // espera 20 segundos
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         origencampo.sendKeys(Keys.DOWN);// Navega con la tecla abajo
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         origencampo.sendKeys(Keys.RETURN); // Selecciona la opción
         System.out.println("Origen correcto: San Salvador, El Salvador (ILS - Ilopango).");
         System.out.println("Paso 5 completado: Origen San Salvador, El Salvador (ILS) seleccionado correctamente.");
@@ -92,9 +93,10 @@ public class VuelosTest {
         WebElement destinocampo = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(3) > div > div > input")));
         destinocampo.click();
         destinocampo.sendKeys("Los Ángeles, California, Estados Unidos (LAX)");
-        new WebDriverWait(driver, Duration.ofSeconds(20)).until(d -> true); // espera 20 segundos
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         // Seleccionar la opción correspondiente de la lista desplegable
         destinocampo.sendKeys(Keys.DOWN); // Navega con la tecla abajo
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         destinocampo.sendKeys(Keys.RETURN); // Selecciona la opción
         System.out.println("Destino correcto: Los Ángeles, California, Estados Unidos (LAX).");
         System.out.println("Paso 6 completado: Destino Los Ángeles, California, Estados Unidos (LAX) seleccionado correctamente.");
