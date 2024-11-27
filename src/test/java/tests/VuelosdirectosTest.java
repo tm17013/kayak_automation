@@ -57,7 +57,7 @@ public class VuelosdirectosTest {
 
 //        Introduce la fecha y la selecciona de la lista emergente
 
-        driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div[1]/div[2]")).click();;
+        driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div[1]/div[2]/div/div")).click();;
         System.out.println("Selecciona la fecha");
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"2024-12\"]"))).click();
         System.out.println("Selecciona diciembre");
