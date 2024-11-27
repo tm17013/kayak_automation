@@ -47,16 +47,16 @@ public class VuelosdirectosTest {
             driver.findElement(By.xpath("//*[@id=\"root\"]/div/header/div/div[2]/div/div[4]/div/div[1]/div[3]/nav/ul/li[3]")).click();
             System.out.println("Da click en vuelos directos");
         } catch (Exception e) {
-            System.out.println("Error durante el test de búsqueda de vuelos directos: " + e.getMessage());
+            System.out.println("Error al entrar a vuelos directos");
             driver.quit();
         }
 
 //        Introduce el nombre del aeropuerto y lo selecciona de la lista
 
-        driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div[1]/div[1]/div/div")).sendKeys("Internacional de El Salvador, San Salvador, El Salvador");
-        System.out.println("Introduce el aeropuesrto");
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[4]/div/div[2]/div[2]/div/ul/li[1]/div"))).click();
-        System.out.println("Selecciona el aeropuerto");
+            driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div[1]/div[1]/div/div")).sendKeys("Internacional de El Salvador, San Salvador, El Salvador");
+            System.out.println("Introduce el aeropuesrto");
+
+
 
 //        Introduce la fecha y la selecciona de la lista emergente
 
