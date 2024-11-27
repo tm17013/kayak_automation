@@ -80,10 +80,13 @@ public class VuelosTest {
         originField.click();
         // Escribir el valor y seleccionar la opción correcta con teclas
         originField.sendKeys("San Salvador, El Salvador (ILS - Ilopango)");
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(d -> true); // espera 3 segundos
         originField.sendKeys(Keys.DOWN);// Navega con la tecla abajo
         originField.sendKeys(Keys.RETURN); // Selecciona la opción
         System.out.println("Origen verificado: San Salvador, El Salvador (ILS - Ilopango).");
         System.out.println("Paso 5 completado: Origen San Salvador, El Salvador (ILS) seleccionado correctamente.");
+
+
 
         // Paso 6-KTC-01: Seleccionar el destino Los Ángeles, California, Estados Unidos (LAX)
         // Hacer clic en el campo de destino
@@ -91,6 +94,7 @@ public class VuelosTest {
         WebElement destinoField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(3) > div > div > input")));
         destinoField.click();
         destinoField.sendKeys("Los Ángeles, California, Estados Unidos (LAX)");
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(d -> true); // espera 3 segundos
         // Seleccionar la opción correspondiente de la lista desplegable
         destinoField.sendKeys(Keys.DOWN); // Navega con la tecla abajo
         destinoField.sendKeys(Keys.RETURN); // Selecciona la opción
