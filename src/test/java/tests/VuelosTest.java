@@ -36,12 +36,12 @@ public class VuelosTest {
 
         // Paso 2-KTC-01: Seleccionar el tipo de vuelo Ida y Vuelta
         // Esperar y hacer clic en el botón de viaje de ida
-        WebElement oneWayTripButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".AFFP-m")));
-        oneWayTripButton.click();
+        WebElement idaButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".AFFP-m")));
+        idaButton.click();
         System.out.println("Botón de viaje de ida seleccionado.");
         // Esperar y hacer clic en el botón de ida y vuelta
-        WebElement roundTripButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#roundtrip > span")));
-        roundTripButton.click();
+        WebElement idayvueltaButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#roundtrip > span")));
+        idayvueltaButton.click();
         System.out.println("Botón de ida y vuelta seleccionado.");
         System.out.println("Paso 2 completado: Tipo de vuelo Ida y Vuelta seleccionado correctamente.");
 
@@ -60,10 +60,10 @@ public class VuelosTest {
 
         // Paso 4-KTC-01: Seleccionar la clase de vuelo Económica
         // Hacer clic en el menú desplegable de clase de vuelo
-        WebElement classDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".udzg-mod-size-small .Uczr-select-title")));
-        classDropdown.click();
+        WebElement clasevuelo = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".udzg-mod-size-small .Uczr-select-title")));
+        clasevuelo.click();
         // Seleccionar la opción Económica
-        WebElement economicaClassOption = wait.until(ExpectedConditions.elementToBeClickable(By.id("e"))); economicaClassOption.click();
+        WebElement economicaClaseOpcion = wait.until(ExpectedConditions.elementToBeClickable(By.id("e"))); economicaClaseOpcion.click();
         // Verificar que la clase económica está seleccionada
         WebElement seleccionClass = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".udzg-mod-size-small .Uczr-select-title")));
         Assert.assertTrue(seleccionClass.getText().contains("Económica"), "La clase seleccionada no es Económica.");
@@ -73,36 +73,34 @@ public class VuelosTest {
 
         // Paso 5-KTC-01: Seleccionar el origen San Salvador, El Salvador (ILS)
         //Dar click en icono "+"
-        WebElement addOriginButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".c_neb-add-icon")));
-        addOriginButton.click();//Dar click en el campo origen
-        // WebElement originField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".NhpT-mod-state-focus")));
-        WebElement originField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[aria-label='Origen']")));
-        originField.click();
+        WebElement iconomas = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".c_neb-add-icon")));
+        iconomas.click();//Dar click en el campo origen
+        WebElement origencampo = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[aria-label='Origen']")));
+        origencampo.click();
         // Escribir el valor y seleccionar la opción correcta con teclas
-        originField.sendKeys("San Salvador, El Salvador (ILS - Ilopango)");
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(d -> true); // espera 3 segundos
-        originField.sendKeys(Keys.DOWN);// Navega con la tecla abajo
-        originField.sendKeys(Keys.RETURN); // Selecciona la opción
-        System.out.println("Origen verificado: San Salvador, El Salvador (ILS - Ilopango).");
+        origencampo.sendKeys("San Salvador, El Salvador (ILS - Ilopango)");
+        new WebDriverWait(driver, Duration.ofSeconds(20)).until(d -> true); // espera 20 segundos
+        origencampo.sendKeys(Keys.DOWN);// Navega con la tecla abajo
+        origencampo.sendKeys(Keys.RETURN); // Selecciona la opción
+        System.out.println("Origen correcto: San Salvador, El Salvador (ILS - Ilopango).");
         System.out.println("Paso 5 completado: Origen San Salvador, El Salvador (ILS) seleccionado correctamente.");
 
 
 
         // Paso 6-KTC-01: Seleccionar el destino Los Ángeles, California, Estados Unidos (LAX)
         // Hacer clic en el campo de destino
-        //WebElement destinoField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".NhpT-mod-state-focus")));
-        WebElement destinoField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(3) > div > div > input")));
-        destinoField.click();
-        destinoField.sendKeys("Los Ángeles, California, Estados Unidos (LAX)");
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(d -> true); // espera 3 segundos
+        WebElement destinocampo = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(3) > div > div > input")));
+        destinocampo.click();
+        destinocampo.sendKeys("Los Ángeles, California, Estados Unidos (LAX)");
+        new WebDriverWait(driver, Duration.ofSeconds(20)).until(d -> true); // espera 20 segundos
         // Seleccionar la opción correspondiente de la lista desplegable
-        destinoField.sendKeys(Keys.DOWN); // Navega con la tecla abajo
-        destinoField.sendKeys(Keys.RETURN); // Selecciona la opción
-        System.out.println("Destino verificado: Los Ángeles, California, Estados Unidos (LAX).");
+        destinocampo.sendKeys(Keys.DOWN); // Navega con la tecla abajo
+        destinocampo.sendKeys(Keys.RETURN); // Selecciona la opción
+        System.out.println("Destino correcto: Los Ángeles, California, Estados Unidos (LAX).");
         System.out.println("Paso 6 completado: Destino Los Ángeles, California, Estados Unidos (LAX) seleccionado correctamente.");
 
 
-        // Paso 7: Seleccionar Fecha de Ida y Vuelta- Probar si es necesario scroll o no.
+        // Paso 7: Seleccionar Fecha de Ida y Vuelta
         try {
             // Realizar scroll 125px hacia abajo para asegurarse de que el calendario esté visible
             JavascriptExecutor js = (JavascriptExecutor) driver;
