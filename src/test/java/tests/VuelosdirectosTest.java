@@ -62,7 +62,7 @@ public class VuelosdirectosTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"2024-12\"]"))).click();
         System.out.println("Selecciona diciembre");
 
-//        Da click en el boton de buscar
+//        Da click en el botón de buscar
 
         driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div[1]/div[3]/button")).click();
         System.out.println("Da click en buscar ");
