@@ -2,10 +2,7 @@ package test.java.tests;
 
 import main.java.driver.DriverSetup;
 import main.java.pages.HomePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -54,20 +51,22 @@ public class VuelosdirectosTest {
             driver.quit();
         }
 
-//        Introduce el nombre del aeropuerto y lo selecciona de la lista
-
-        driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div[1]/div[1]/div/div")).sendKeys("Internacional de El Salvador, San Salvador, El Salvador");
-        System.out.println("Introduce el aeropuesrto");
 
 
-        actions.sendKeys(Keys.PAGE_UP).perform();
+        // Desplazar la página hasta el campo del aeropuerto y seleccionarlo
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement aeropuertoInput = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"main\"]/div[1]/div/div[1]/div[1]/div/div")));
+        js.executeScript("arguments[0].scrollIntoView(true);", aeropuertoInput); // Desplaza el campo a la vista
+        aeropuertoInput.sendKeys("Internacional de El Salvador, San Salvador, El Salvador");
+        System.out.println("Introduce el aeropuerto");
 
-//        Introduce la fecha y la selecciona de la lista emergente
-
-        driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div[1]/div[2]/div/div")).click();;
-        System.out.println("Selecciona la fecha");
+        // Desplazar la página hasta el campo de fecha y seleccionarlo
+        WebElement fechaInput = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"main\"]/div[1]/div/div[1]/div[2]/div/div")));
+        js.executeScript("arguments[0].scrollIntoView(true);", fechaInput); // Desplaza el campo de fecha a la vista
+        fechaInput.click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"2024-12\"]"))).click();
         System.out.println("Selecciona diciembre");
+
 
 //        Da click en el botón de buscar
 
