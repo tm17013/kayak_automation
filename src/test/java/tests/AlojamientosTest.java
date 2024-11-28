@@ -135,7 +135,6 @@ public class AlojamientosTest {
         WebElement buscarButton = driver.findElement(By.xpath("//*[@id=\"main-search-form\"]/div/div[2]/span/span/button/div"));
         buscarButton.click();
         System.out.println("Da click en buscar ");
-        Thread.sleep(20000); //Espera para poder visualizar la pagina de resultados
 
         // Cambiar al contexto de la nueva pestaña
         String originalWindow = driver.getWindowHandle();
@@ -167,24 +166,6 @@ public class AlojamientosTest {
             System.out.println("Error: No se encontraron elementos con el selector '.gfww'. Verifica el selector o aumenta el tiempo de espera.");
         }
 
-        // Esperar a que los resultados estén visibles
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".gfww")));
-        System.out.println("Se localizó");
-        List<WebElement> elementNames = driver.findElements(By.cssSelector(".gfww"));
-        System.out.println("Se encontró");
-
-
-        // Recorrer la lista y obtener el texto de cada elemento
-        for (WebElement element : elementNames) {
-            String resultados = element.getText();
-            System.out.println("Total de elementos encontrados: " + resultados + " de Alojamientos");
-        }
-
-        // Recorrer la lista y obtener el texto de cada elemento
-        for (WebElement element : elementNames) {
-            String resultados = element.getText();
-            System.out.println("Total de elementos encontrados: " + resultados + " de Alojamientos");
-        }
 
 
 
