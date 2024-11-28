@@ -104,57 +104,37 @@ public class VuelosTest {
 
         // Paso 7: Seleccionar Fecha de Ida y Vuelta
         // Esperar y hacer clic en el botón de fecha de ida para desplegar el calendario
-        WebElement fechaIdaButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".JONo-button")));
-        fechaIdaButton.click();
-        System.out.println("Botón de fecha de ida clickeado, calendario desplegado.");
+        try {
+            // Realizar scroll 125px hacia abajo para asegurarse de que el calendario esté visible
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0, 125);");
+            System.out.println("Desplazamiento realizado.");
 
-        // Esperar a que el calendario sea visible
-        WebElement calendario = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".FqLu-mod-layer-dropdown")));
-        System.out.println("Calendario visible.");
+            // Esperar y hacer clic en el botón de fecha de ida para desplegar el calendario
+            WebElement fechaIdaButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".JONo-button")));
+            fechaIdaButton.click();
+            System.out.println("Botón de fecha de ida clickeado, calendario desplegado.");
 
-        // Seleccionar el 23 de diciembre usando CSS Selector
-        WebElement fecha23 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[aria-label*='23 de diciembre de 2024']")));
-        fecha23.click();
-        System.out.println("Fecha 23 de diciembre seleccionada.");
+            // Esperar a que el calendario sea visible
+            WebElement calendario = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".FqLu-mod-layer-dropdown")));
+            System.out.println("Calendario visible.");
 
-        // Seleccionar el 24 de diciembre usando CSS Selector
-        WebElement fecha24 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[aria-label*='24 de diciembre de 2024']")));
-        fecha24.click();
-        System.out.println("Fecha 24 de diciembre seleccionada.");
-        System.out.println("Paso 7 completado: Seleccion de fecha de ida y vuelta");
-//        try {
-//            // Realizar scroll 125px hacia abajo para asegurarse de que el calendario esté visible
-//            JavascriptExecutor js = (JavascriptExecutor) driver;
-//            js.executeScript("window.scrollBy(0, 125);");
-//            System.out.println("Desplazamiento realizado 125px hacia abajo.");
-//
-//            // Esperar y hacer clic en el botón de fecha de ida para desplegar el calendario
-//            WebElement fechaIdaButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".JONo-button")));
-//            fechaIdaButton.click();
-//            System.out.println("Botón de fecha de ida clickeado, calendario desplegado.");
-//
-//            // Esperar a que el calendario sea visible
-//            WebElement calendario = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".FqLu-mod-layer-dropdown")));
-//            System.out.println("Calendario visible.");
-//
-//            // Seleccionar el 23 de diciembre usando CSS Selector
-//            WebElement fecha23 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[aria-label*='23 de diciembre de 2024']")));
-//            fecha23.click();
-//            System.out.println("Fecha 23 de diciembre seleccionada.");
-//
-//            // Seleccionar el 24 de diciembre usando CSS Selector
-//            WebElement fecha24 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[aria-label*='24 de diciembre de 2024']")));
-//            fecha24.click();
-//            System.out.println("Fecha 24 de diciembre seleccionada.");
-//            System.out.println("Paso 7 completado: Seleccion de fecha de ida y vuelta");
-//        } catch (Exception e) {
-//            System.err.println("Error durante el proceso: " + e.getMessage());
-//        }
+            // Seleccionar el 23 de diciembre usando CSS Selector
+            WebElement fecha23 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[aria-label*='23 de diciembre de 2024']")));
+            fecha23.click();
+            System.out.println("Fecha 23 de diciembre seleccionada.");
+
+            // Seleccionar el 24 de diciembre usando CSS Selector
+            WebElement fecha24 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[aria-label*='24 de diciembre de 2024']")));
+            fecha24.click();
+            System.out.println("Fecha 24 de diciembre seleccionada.");
+            System.out.println("Paso 7 completado: Seleccion de fecha de ida y vuelta");
+        } catch (Exception e) {
+            System.err.println("Error durante el proceso: " + e.getMessage());
+        }
 
         // Paso 8: Hacer clic en el botón de "Buscar"
-        // Crear WebDriverWait reutilizable
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         // Hacer clic en el botón de búsqueda
         WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#main-search-form > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > span > button")));
         searchButton.click();
@@ -192,9 +172,8 @@ public class VuelosTest {
         //TestCaseVuelos Exitoso
         System.out.println("KTC-01 exitoso!");
     }
-//    @AfterClass
-//    public void tearDown() {
-//        // Cerrar el WebDriver
-//        DriverSetup.quitDriver();
-//    }
+    @AfterClass
+    public void tearDown() {
+        DriverSetup.quitDriver();
+    }
 }
