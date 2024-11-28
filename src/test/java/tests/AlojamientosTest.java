@@ -81,12 +81,12 @@ public class AlojamientosTest {
         adultos.click();
         new WebDriverWait(driver, Duration.ofSeconds(2)).until(d -> true);
         for (int i = 0; i <= 1; i++) {
-            adultos.sendKeys(Keys.ARROW_LEFT);
+            adultos.sendKeys(Keys.ARROW_LEFT); //Ya que la página por defecto tiene 2 adultos seleccionados lo regresamos a el valor de 1
             new WebDriverWait(driver, Duration.ofSeconds(2)).until(d -> true);
         }
 
         for (int i = 0; i <= 1; i++) {
-            adultos.sendKeys(Keys.ARROW_RIGHT);
+            adultos.sendKeys(Keys.ARROW_RIGHT); //Selecciona 3 adultos
         }
         System.out.println("Aumenta la cantidad a 3 adultos");
         new WebDriverWait(driver, Duration.ofSeconds(2)).until(d -> true);
@@ -95,47 +95,38 @@ public class AlojamientosTest {
         //        Introducir numero de Ninios
 
         WebElement ninios = driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[2]/div/div[3]/div/div/input"));
-        ninios.sendKeys("3"); //Agregar 3 ninios
+        ninios.sendKeys("3"); //Agregar 3 niños
         System.out.println("Aumenta la cantidad a 3 niños");
         Thread.sleep(2000);
 
         //Edad_ninio1
 
-        WebElement ninio1 = driver.findElement(By.xpath("/html/body/div[4]/div/div[2]/div[2]/div/div[3]/div[2]/div[1]/div/div/div/div"));
+        WebElement ninio1 = driver.findElement(By.cssSelector(".KIGt-childAge:nth-child(1) svg"));
         ninio1.click();
-        Thread.sleep(2000);
 
-        for (int i = 0; i <= 2; i++) {  //Digita 3 años
-            ninio1.sendKeys(Keys.ARROW_DOWN);
-            Thread.sleep(1000);
-        }
-
-        ninio1.sendKeys(Keys.ENTER);
+        WebElement edadNinio1 = wait.until(ExpectedConditions.elementToBeClickable(By.id("3"))); // Espera a que la opción esté clickeable
+        edadNinio1.click(); // Selecciona la edad de 3 añps
         Thread.sleep(2000);
 
         //Edad_ninio2
 
-        WebElement ninio2 = driver.findElement(By.xpath("/html/body/div[4]/div/div[2]/div[2]/div/div[3]/div[2]/div[2]/div/div/div/div"));
-        ninio1.click();
+        WebElement ninio2 = driver.findElement(By.cssSelector(".KIGt-childAge:nth-child(2) svg"));
+        ninio2.click();
 
-
-        Thread.sleep(3000);
-        for (int i = 0; i <= 6; i++) {  //Digita 7 años
-            ninio2.sendKeys(Keys.ARROW_DOWN);
-            Thread.sleep(1000);
-        }
-        ninio2.sendKeys(Keys.RETURN);
+        WebElement edadNinio2 = wait.until(ExpectedConditions.elementToBeClickable(By.id("7"))); // Espera a que la opción esté clickeable
+        edadNinio2.click(); // Selecciona la edad de 7 años
         Thread.sleep(2000);
-//
-//        //Edad_ninio3
-//
-//        WebElement ninio3 = driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[2]/div/div[3]/div[2]/div[3]/div/div/div/div"));
-//        ninio3.click();
-//        Thread.sleep(2000);
-//        ninio3.sendKeys(Keys.ARROW_DOWN);
-//        Thread.sleep(2000);
-//        ninio3.sendKeys(Keys.ENTER);
-//        Thread.sleep(2000);
+
+        //Edad_ninio3
+
+        WebElement ninio3 = driver.findElement(By.cssSelector(".KIGt-childAge:nth-child(3) svg"));
+        ninio3.click();
+
+        WebElement edadNinio3 = wait.until(ExpectedConditions.elementToBeClickable(By.id("12"))); // Espera a que la opción esté clickeable
+        edadNinio3.click(); // Selecciona la edad de 12 años
+        Thread.sleep(2000);
+        System.out.println("Edades seleccionadas: 3, 7, y 12 años");
+
 
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("idDelSpinner")));
 
@@ -144,7 +135,7 @@ public class AlojamientosTest {
         WebElement buscarButton = driver.findElement(By.xpath("//*[@id=\"main-search-form\"]/div/div[2]/span/span/button/div"));
         buscarButton.click();
         System.out.println("Da click en buscar ");
-        Thread.sleep(10000);
+        Thread.sleep(20000); //Espera para poder visualizar la pagina de resultados
 
         // Cambiar al contexto de la nueva pestaña
         String originalWindow = driver.getWindowHandle();
@@ -178,9 +169,9 @@ public class AlojamientosTest {
 
         // Esperar a que los resultados estén visibles
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".gfww")));
-        System.out.println("Se localizo");
+        System.out.println("Se localizó");
         List<WebElement> elementNames = driver.findElements(By.cssSelector(".gfww"));
-        System.out.println("Se encontro");
+        System.out.println("Se encontró");
 
 
         // Recorrer la lista y obtener el texto de cada elemento
@@ -189,12 +180,11 @@ public class AlojamientosTest {
             System.out.println("Total de elementos encontrados: " + resultados + " de Alojamientos");
         }
 
-// Recorrer la lista y obtener el texto de cada elemento
+        // Recorrer la lista y obtener el texto de cada elemento
         for (WebElement element : elementNames) {
             String resultados = element.getText();
             System.out.println("Total de elementos encontrados: " + resultados + " de Alojamientos");
         }
-        Thread.sleep(10000);
 
 
 
